@@ -5,8 +5,9 @@ export default class FullImage extends Component {
 
   getPosistionsFromJSON = () => {
     const fileJSON = require('./img/file.json');
+    fromTop = 100;
     console.log(fileJSON);
-    spots = fileJSON.spots.map((spot, i) => <Text key={i}>Dugme</Text>);
+    spots = fileJSON.spots.map((spot, i) => <Text onPress={() => console.log(i)} style={{position: 'absolute', top: fromTop*i, left: 40, zIndex: 999, color: 'white'}} key={i}>Dugme</Text>);
     return spots;   
   }
 
