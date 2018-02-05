@@ -6,6 +6,9 @@ export default class FullImage extends Component {
   getPosistionsFromJSON = () => {
     const fileJSON = require('./img/file.json');
     console.log(fileJSON);
+    console.log(fileJSON.spots[0]);
+    console.log(fileJSON.spots[1]);
+
   }
 
   render() {
