@@ -1,0 +1,16 @@
+{
+    "fileId": "img",
+    "pageId": "0",
+    "type": "image",
+    "ext": "jpg",
+    "size": "44531",
+    "hash": "...",
+    "updateDate": "1517308770",
+    "sort": "1",
+    "filename": "img.jpg",
+    "spots": [
+            {  "x": "10" , "y": "10", "pageTitle": "test 1", "pageId": "//google.com"}
+        ,
+             { "x": "50" , "y": "10", "pageTitle": "test 2", "pageId": "//google.com"}
+    ]
+}
