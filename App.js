@@ -7,29 +7,14 @@ export default class FullImage extends Component {
     const fileJSON = require('./img/file.json');
     console.log(fileJSON);
     spots = fileJSON.spots.map((spot, i) =>
-
-      <View style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y) + '%', left: (spot.x) + '%', height: 50}}>
-        <TouchableOpacity style={{ padding: 5, marginTop: 10 }} >
-          <Image source={require('./img/hotspot.png')} />
+      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y) + '%', left: (spot.x) + '%', height: 50 }}>
+        <TouchableOpacity key={i} style={{ padding: 5, marginTop: 10 }} >
+          <Image key={i + '.image'} source={require('./img/hotspot.png')} />
         </TouchableOpacity>
-        <View style={styles.hotspotTitileView}>
-          <Text style={styles.hotspotTitle}>{spot.pageTitle}</Text>
+        <View key={i + '.viewSlave'} style={styles.hotspotTitileView}>
+          <Text key={i + '.text'} style={styles.hotspotTitle}>{spot.pageTitle}</Text>
         </View>
       </View>
-
-
-      // <Text
-      //   onPress={() => console.log(i)}
-      //   style={
-      //     {
-      //       position: 'absolute',
-      //       top: (spot.y) + '%',
-      //       left: (spot.x) + '%',
-      //       zIndex: 999, color: 'white'
-      //     }}
-      //   key={i}>
-      //   Dugme
-      //    </Text>
     );
     return spots;
   }
