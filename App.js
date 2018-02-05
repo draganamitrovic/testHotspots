@@ -13,8 +13,8 @@ export default class FullImage extends Component {
         style={
           {
             position: 'absolute',
-            top: (spot.y) + '%',
-            left: (spot.x) + '%',
+            top: spot.y + '%',
+            left: spot.x + '%',
             zIndex: 999, color: 'white'
           }}
         key={i}>
