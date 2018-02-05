@@ -9,8 +9,8 @@
     "sort": "1",
     "filename": "img.jpg",
     "spots": [
-            [ { "x": "10%" }, { "y": "10%" } ]
+            {  "x": "10" , "y": "10", "pageTitle": "test 1", "pageId": "//google.com"}
         ,
-             [ { "x": "50%" }, { "y": "10%" } ]
+             { "x": "50" , "y": "10", "pageTitle": "test 2", "pageId": "//google.com"}
     ]
 }
