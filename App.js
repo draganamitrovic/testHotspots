@@ -4,11 +4,12 @@ import { StyleSheet, View, Image } from 'react-native';
 export default class FullImage extends Component {
 
   getPosistionsFromJSON = () => {
-    const fileJson;
+    const fileJSON = require('./img/file.json');
+    console.log(fileJSON);
   }
 
   render() {
-
+    this.getPosistionsFromJSON();
     return (
       <View style={styles.mainView}>
 
