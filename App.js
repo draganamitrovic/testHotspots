@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text, TouchableWithoutFeedback } from 'react-native';
+import RNFB from 'react-native-fetch-blob';
+import resolveAssetSource from 'resolveAssetSource';
 
 export default class FullImage extends Component {
 
   getPosistionsFromJSON = () => {
     const fileJSON = require('./img/file.json');
     console.log(fileJSON);
+    const { width, height } = resolveAssetSource(require('./img/1635.jpg'));
+    console.log('uh...', width, height);
+
     hotspot = fileJSON.files.spots.map((spot, i) =>
-      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y/10) + '%', left: (spot.x/10) + '%' }}>
+      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y / 10) + '%', left: (spot.x / 10) + '%' }}>
         <TouchableOpacity key={i} style={{ padding: 5, marginTop: 10 }} >
           <Image key={i + '.image'} source={require('./img/hotspot.png')} />
         </TouchableOpacity>
@@ -19,6 +24,30 @@ export default class FullImage extends Component {
     return hotspot;
   }
 
+  downloadHotspotImages = () => {
+
+  }
+
+  generateHotspots = () => {
+    const hotspotsJSONContent = RNFB.fs.dirs.DocumentDir + '/hotspotsJSON.json';
+    const hotspotsJSONUrl = 'http://www.cduppy.com/salescms/?a=ajax&do=getHotspots&projectId=5&token=1234567890';
+
+    RNFB.config({ path: hotspotsJSONContent, overwrite: true }).fetch('GET', hotspotsJSONUrl)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+
+      });
+  }
+
+  componentWillMount() {
+    // RNFB.config({ path: RNFB.fs.dirs.DocumentDir + '/puppy.jpg' }).fetch('GET', 'https://assets1.cdn-mw.com/mw/images/article/art-wap-landing-mp-lg/puppy-3143-ad4140d8f6055cda2cd8956d4af37ea9@1x.jpg')
+    //   .then(() => {
+    //     Image.getSize('file://' + RNFB.fs.dirs.DocumentDir + '/puppy.jpg', (w, h) => console.log('got it: ', w, h));
+    //   });
+    // this.generateHotspots()
+  }
+
   render() {
 
     return (
@@ -28,7 +57,7 @@ export default class FullImage extends Component {
 
           <View style={styles.contentContainer}>
 
-            <Image resizeMethod='resize' style={{ width: '100%', height: '100%', resizeMode: 'cover', zIndex: 1 }} source={require('./img/1635.jpg')} />
+            <Image ref='_image' resizeMethod='resize' style={{ width: '100%', height: '100%', resizeMode: 'cover', zIndex: 1 }} source={require('./img/1635.jpg')} />
             {this.getPosistionsFromJSON()}
 
           </View>
