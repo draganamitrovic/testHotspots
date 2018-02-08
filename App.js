@@ -6,17 +6,17 @@ export default class FullImage extends Component {
   getPosistionsFromJSON = () => {
     const fileJSON = require('./img/file.json');
     console.log(fileJSON);
-    spots = fileJSON.spots.map((spot, i) =>
-      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y) + '%', left: (spot.x) + '%', height: 50 }}>
+    hotspot = fileJSON.files.spots.map((spot, i) =>
+      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y/10) + '%', left: (spot.x/10) + '%' }}>
         <TouchableOpacity key={i} style={{ padding: 5, marginTop: 10 }} >
           <Image key={i + '.image'} source={require('./img/hotspot.png')} />
         </TouchableOpacity>
         <View key={i + '.viewSlave'} style={styles.hotspotTitileView}>
-          <Text key={i + '.text'} style={styles.hotspotTitle}>{spot.pageTitle}</Text>
+          <Text key={i + '.text'} style={styles.hotspotTitle}>{spot.label}</Text>
         </View>
       </View>
     );
-    return spots;
+    return hotspot;
   }
 
   render() {
@@ -28,7 +28,7 @@ export default class FullImage extends Component {
 
           <View style={styles.contentContainer}>
 
-            <Image resizeMethod='resize' style={{ width: '100%', height: '100%', resizeMode: 'cover', zIndex: 1 }} source={require('./img/img.jpeg')} />
+            <Image resizeMethod='resize' style={{ width: '100%', height: '100%', resizeMode: 'cover', zIndex: 1 }} source={require('./img/1635.jpg')} />
             {this.getPosistionsFromJSON()}
 
           </View>

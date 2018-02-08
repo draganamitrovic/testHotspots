@@ -1,16 +1,25 @@
 {
-    "fileId": "img",
-    "pageId": "0",
-    "type": "image",
-    "ext": "jpg",
-    "size": "44531",
-    "hash": "...",
-    "updateDate": "1517308770",
-    "sort": "1",
-    "filename": "img.jpg",
-    "spots": [
-            {  "x": "10" , "y": "10", "pageTitle": "test 1", "pageId": "//google.com"}
-        ,
-             { "x": "50" , "y": "10", "pageTitle": "test 2", "pageId": "//google.com"}
-    ]
+    "lastChanges": "1518019934",
+    "files": 
+        
+        {
+            "fileId": "1635",
+            "filename": "1635.jpg",
+            "pageId": "653",
+            "type": "image",
+            "ext": "jpg",
+            "size": "30717",
+            "hash": "64abad122845285db58370f5c7a916f3",
+            "updateDate": "1517308594",
+            "languageId": "2",
+            "spots": [
+                {
+                    "x": "785",
+                    "y": "400",
+                    "label": "spot 1",
+                    "linkPageId": "651"
+                }
+            ]
+        }
+    
 }
