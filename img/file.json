@@ -1,7 +1,7 @@
 {
-    "lastChanges": "1518019934",
+    "lastChanges": "1518099671",
     "files": 
-        
+       
         {
             "fileId": "1635",
             "filename": "1635.jpg",
@@ -16,8 +16,14 @@
                 {
                     "x": "785",
                     "y": "400",
-                    "label": "spot 1",
+                    "label": "spot 12",
                     "linkPageId": "651"
+                },
+                {
+                    "x": "232",
+                    "y": "698",
+                    "label": "spot 22",
+                    "linkPageId": "0"
                 }
             ]
         }

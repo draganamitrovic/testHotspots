@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text, TouchableWithoutFeedback } from 'react-native';
+import resolveAssetSource from 'resolveAssetSource';
 
 export default class FullImage extends Component {
 
   getPosistionsFromJSON = () => {
+    const { width, height } = resolveAssetSource(require('./img/1635.jpg'));
     const fileJSON = require('./img/file.json');
     console.log(fileJSON);
     hotspot = fileJSON.files.spots.map((spot, i) =>
-      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y/10) + '%', left: (spot.x/10) + '%' }}>
+      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: height-height*spot.y/1000, left: width-width*spot.x/1000 }}>
         <TouchableOpacity key={i} style={{ padding: 5, marginTop: 10 }} >
           <Image key={i + '.image'} source={require('./img/hotspot.png')} />
         </TouchableOpacity>
