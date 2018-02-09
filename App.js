@@ -16,8 +16,8 @@ export default class FullImage extends Component {
       const posx = this.state.layoutWidth * ((spot.x) / 1000);
       const posy = this.state.layoutHeigth * (spot.y / 1000);
       return (
-        <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, left: posx - 10, top: posy - 10 }}>
-          <TouchableOpacity key={i} style={{ padding: 0, marginTop: 0 }} >
+        <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, left: posx - 10, top: posy - 25 }}>
+          <TouchableOpacity key={i} style={{ padding: 0, marginTop: 15, }} >
             <Image key={i + '.image'} source={require('./img/hotspot.png')} />
           </TouchableOpacity>
           <View key={i + '.viewSlave'} style={styles.hotspotTitileView}>
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     width: 150,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 15
   },
 
 });
