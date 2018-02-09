@@ -1,7 +1,37 @@
 {
     "lastChanges": "1518099671",
-    "files": 
-       
+    "files": [
+        {
+            "fileId": "1639",
+            "filename": "1639.jpg",
+            "pageId": "651",
+            "type": "image",
+            "ext": "jpg",
+            "size": "98383",
+            "hash": "81e6bc1c828192baaa589623a35977bb",
+            "updateDate": "1517308770",
+            "languageId": "2",
+            "spots": [
+                {
+                    "x": "457",
+                    "y": "820",
+                    "label": "Spot 1",
+                    "linkPageId": "656"
+                },
+                {
+                    "x": "331",
+                    "y": "702",
+                    "label": "Spot 2",
+                    "linkPageId": "653"
+                },
+                {
+                    "x": "724",
+                    "y": "678",
+                    "label": "Spot 3",
+                    "linkPageId": "657"
+                }
+            ]
+        },
         {
             "fileId": "1635",
             "filename": "1635.jpg",
@@ -27,5 +57,5 @@
                 }
             ]
         }
-    
+    ]
 }
