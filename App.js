@@ -1,31 +1,58 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Text, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import RNFB from 'react-native-fetch-blob';
 import resolveAssetSource from 'resolveAssetSource';
 
 export default class FullImage extends Component {
 
+  state = {
+    layoutWidth: 0,
+    layoutHeigth: 0
+  }
+
+  generate = () => {
+    const fileJSON = require('./img/file.json');
+    hotspot = fileJSON.files[0].spots.map((spot, i) => {
+      const posx = this.state.layoutWidth * ((spot.x) / 1000);
+      const posy = this.state.layoutHeigth * (spot.y / 1000);
+      return (
+        <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, left: posx, top: posy }}>
+          <TouchableOpacity key={i} style={{ padding: 5, marginTop: 10 }} >
+            <Image key={i + '.image'} source={require('./img/hotspot.png')} />
+          </TouchableOpacity>
+          <View key={i + '.viewSlave'} style={styles.hotspotTitileView}>
+            <Text key={i + '.text'} style={styles.hotspotTitle}>{spot.label}</Text>
+          </View>
+        </View>
+      );
+    });
+  }
+
   getPosistionsFromJSON = () => {
     const fileJSON = require('./img/file.json');
     console.log(fileJSON);
     const { width, height } = resolveAssetSource(require('./img/1635.jpg'));
-    console.log('uh...', width, height);
+    console.log('imagewh', width, height);
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
+    console.log('Dimensions,', windowWidth, windowHeight);
+    console.log('onLayout', this.state.layoutWidth, this.state.layoutHeigth);
 
-    hotspot = fileJSON.files.spots.map((spot, i) =>
-      <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, top: (spot.y / 10) + '%', left: (spot.x / 10) + '%' }}>
-        <TouchableOpacity key={i} style={{ padding: 5, marginTop: 10 }} >
-          <Image key={i + '.image'} source={require('./img/hotspot.png')} />
-        </TouchableOpacity>
-        <View key={i + '.viewSlave'} style={styles.hotspotTitileView}>
-          <Text key={i + '.text'} style={styles.hotspotTitle}>{spot.label}</Text>
+    hotspot = fileJSON.files[0].spots.map((spot, i) => {
+      const posx = this.state.layoutWidth * ((spot.x) / 1000);
+      const posy = this.state.layoutHeigth * (spot.y / 1000);
+      return (
+        <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, left: posx - 10, top: posy - 10 }}>
+          <TouchableOpacity key={i} style={{ padding: 0, marginTop: 0 }} >
+            <Image key={i + '.image'} source={require('./img/hotspot.png')} />
+          </TouchableOpacity>
+          <View key={i + '.viewSlave'} style={styles.hotspotTitileView}>
+            <Text key={i + '.text'} style={styles.hotspotTitle}>{spot.label}</Text>
+          </View>
         </View>
-      </View>
-    );
+      );
+    });
     return hotspot;
-  }
-
-  downloadHotspotImages = () => {
-
   }
 
   generateHotspots = () => {
@@ -39,31 +66,27 @@ export default class FullImage extends Component {
 
       });
   }
-
-  componentWillMount() {
-    // RNFB.config({ path: RNFB.fs.dirs.DocumentDir + '/puppy.jpg' }).fetch('GET', 'https://assets1.cdn-mw.com/mw/images/article/art-wap-landing-mp-lg/puppy-3143-ad4140d8f6055cda2cd8956d4af37ea9@1x.jpg')
-    //   .then(() => {
-    //     Image.getSize('file://' + RNFB.fs.dirs.DocumentDir + '/puppy.jpg', (w, h) => console.log('got it: ', w, h));
-    //   });
-    // this.generateHotspots()
-  }
-
   render() {
 
     return (
-      <View style={styles.mainView}>
-
+      <View style={styles.mainView} >
         <View style={styles.body}>
-
           <View style={styles.contentContainer}>
-
-            <Image ref='_image' resizeMethod='resize' style={{ width: '100%', height: '100%', resizeMode: 'cover', zIndex: 1 }} source={require('./img/1635.jpg')} />
+            <Image
+              ref='_image'
+              resizeMode='center'
+              style={{ width: '100%', height: '100%', resizeMode: 'stretch', zIndex: 1 }}
+              onLayout={event => {
+                const width = event.nativeEvent.layout.width;
+                const height = event.nativeEvent.layout.height;
+                console.log('event', width, height);
+                this.setState(() => ({ layoutWidth: width, layoutHeigth: height }));
+              }}
+              source={require('./img/1639.jpg')} />
             {this.getPosistionsFromJSON()}
-
+            {this.generate()}
           </View>
-
         </View>
-
       </View>
     );
   }
@@ -88,7 +111,7 @@ const styles = StyleSheet.create({
   hotspotTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#da281c'
+    color: '#da281c',
   },
 
   hotspotTitileView: {
@@ -100,7 +123,6 @@ const styles = StyleSheet.create({
     width: 150,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20
   },
 
 });
