@@ -9,35 +9,8 @@ export default class FullImage extends Component {
     layoutWidth: 0,
     layoutHeigth: 0
   }
-
-  generate = () => {
-    const fileJSON = require('./img/file.json');
-    hotspot = fileJSON.files[0].spots.map((spot, i) => {
-      const posx = this.state.layoutWidth * ((spot.x) / 1000);
-      const posy = this.state.layoutHeigth * (spot.y / 1000);
-      return (
-        <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, left: posx, top: posy }}>
-          <TouchableOpacity key={i} style={{ padding: 5, marginTop: 10 }} >
-            <Image key={i + '.image'} source={require('./img/hotspot.png')} />
-          </TouchableOpacity>
-          <View key={i + '.viewSlave'} style={styles.hotspotTitileView}>
-            <Text key={i + '.text'} style={styles.hotspotTitle}>{spot.label}</Text>
-          </View>
-        </View>
-      );
-    });
-  }
-
   getPosistionsFromJSON = () => {
     const fileJSON = require('./img/file.json');
-    console.log(fileJSON);
-    const { width, height } = resolveAssetSource(require('./img/1635.jpg'));
-    console.log('imagewh', width, height);
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
-    console.log('Dimensions,', windowWidth, windowHeight);
-    console.log('onLayout', this.state.layoutWidth, this.state.layoutHeigth);
-
     hotspot = fileJSON.files[0].spots.map((spot, i) => {
       const posx = this.state.layoutWidth * ((spot.x) / 1000);
       const posy = this.state.layoutHeigth * (spot.y / 1000);
@@ -55,18 +28,7 @@ export default class FullImage extends Component {
     return hotspot;
   }
 
-  generateHotspots = () => {
-    const hotspotsJSONContent = RNFB.fs.dirs.DocumentDir + '/hotspotsJSON.json';
-    const hotspotsJSONUrl = 'http://www.cduppy.com/salescms/?a=ajax&do=getHotspots&projectId=5&token=1234567890';
-
-    RNFB.config({ path: hotspotsJSONContent, overwrite: true }).fetch('GET', hotspotsJSONUrl)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-
-      });
-  }
-  render() {
+ render() {
 
     return (
       <View style={styles.mainView} >
@@ -84,7 +46,6 @@ export default class FullImage extends Component {
               }}
               source={require('./img/1639.jpg')} />
             {this.getPosistionsFromJSON()}
-            {this.generate()}
           </View>
         </View>
       </View>
