@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import RNFB from 'react-native-fetch-blob';
-import resolveAssetSource from 'resolveAssetSource';
 
 export default class FullImage extends Component {
 
@@ -12,8 +11,8 @@ export default class FullImage extends Component {
   getPosistionsFromJSON = () => {
     const { width, height } = resolveAssetSource(require('./img/1635.jpg'));
     const fileJSON = require('./img/file.json');
-    hotspot = fileJSON.files[0].spots.map((spot, i) => {
-      const posx = this.state.layoutWidth * ((spot.x) / 1000);
+    hotspot = fileJSON.files[1].spots.map((spot, i) => {
+      const posx = this.state.layoutWidth * (spot.x / 1000);
       const posy = this.state.layoutHeigth * (spot.y / 1000);
       return (
         <View key={i + '.viewMaster'} style={{ flexDirection: 'row', position: "absolute", zIndex: 20, left: posx - 10, top: posy - 25 }}>
@@ -45,7 +44,7 @@ export default class FullImage extends Component {
                 console.log('event', width, height);
                 this.setState(() => ({ layoutWidth: width, layoutHeigth: height }));
               }}
-              source={require('./img/1639.jpg')} />
+              source={require('./img/1635.jpg')} />
             {this.getPosistionsFromJSON()}
           </View>
         </View>
